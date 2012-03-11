@@ -1,0 +1,12 @@
+<?page title="My First ZK Application" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="My First ZK Application" border="normal">
+Hello World! Run In Jetty Container!
+<separator />
+<button label="Say Hello"  onClick='alert("Hello World!")' />
+<separator />
+Enter a property name: <textbox id="input" />
+<button label="Retrieve" onClick="result.appendChild(new Label(System.getProperty(input.getValue())))" />
+<vlayout id="result" />
+</window>
+</zk>
