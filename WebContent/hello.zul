@@ -6,7 +6,26 @@ Hello World! Run In Jetty Container!
 <button label="Say Hello"  onClick='alert("Hello World!")' />
 <separator />
 Enter a property name: <textbox id="input" />
-<button label="Retrieve" onClick="result.appendChild(new Label(System.getProperty(input.getValue())))" />
+<button label="Retrieve" apply="foo.PropertyRetriever" />
 <vlayout id="result" />
+
+<separator/>
+
+<?variable-resolver class="foo.UserResolver"?>
+<grid>
+	<columns>
+		<column label="Name" sort="auto" />
+		<column label="Title" sort="auto" />
+		<column label="Age" sort="auto" />
+	</columns>
+	<rows>
+		<row forEach="${users}">
+			<label value="${each.name}" />
+			<label value="${each.title}" />
+			<label value="${each.age}" />
+		</row>
+	</rows>
+</grid>
+
 </window>
 </zk>
