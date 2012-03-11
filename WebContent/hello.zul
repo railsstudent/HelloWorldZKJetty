@@ -1,6 +1,6 @@
 <?page title="My First ZK Application" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="My First ZK Application" border="normal" apply="foo.PropertyRetriever">
+<window title="Property Retrieval" border="normal" apply="foo.PropertyRetriever">
 Hello World! Run In Jetty Container!
 <separator />
 <button label="Say Hello"  onClick='alert("Hello World!")' />
@@ -13,12 +13,12 @@ Enter a property name: <textbox id="input" />
 <separator/>
 
 <?variable-resolver class="foo.UserResolver"?>
-<grid apply="org.zkoss.bind.BindComposer"
+<grid width="800px" apply="org.zkoss.bind.BindComposer"
     viewModel="@id('vm') @init('foo.UserViewModel')" model="@bind(vm.allUsers)">
 	<columns>
-		<column label="Name" sort="auto" />
-		<column label="Title" sort="auto" />
-		<column label="Age" sort="auto" />
+		<column label="Name" sort="auto" width="350px" />
+		<column label="Title" sort="auto" width="350px" />
+		<column label="Age" sort="auto" width="100px" />
 	</columns>
 	<template name="model" var="user">
 		<row>

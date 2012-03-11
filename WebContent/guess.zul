@@ -1,0 +1,19 @@
+<?page title="Guessing Game" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Guess a  number" border="normal">
+<vlayout>
+   Type number between 0 and 99 and then press Enter to guess:
+    <intbox w:onOK="guess(this)" xmlns:w="client"/>
+</vlayout>
+<script><![CDATA[
+    var num = Math.floor(Math.random() * 100);
+    function guess(wgt) {
+        var val = wgt.getValue(),
+            mesg = val > num ? "smaller than " + val:
+                val < num ? "larger than "+val: val + " is correct!";
+        wgt.parent.appendChild(new zul.wgt.Label({value: mesg}));
+        wgt.setValue("");
+    }
+]]></script>
+</window>
+</zk>
