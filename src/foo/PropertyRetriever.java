@@ -2,22 +2,32 @@ package foo;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.util.Composer;
+import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Vlayout;
 
-public class PropertyRetriever implements Composer<Component> {
+public class PropertyRetriever extends SelectorComposer<Component> {
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void doAfterCompose(final Component target) throws Exception {
-		target.addEventListener("onClick", 
-				new EventListener() {
-					public void onEvent(Event event) throws Exception {
-						String prop = System.getProperty(((Textbox) target.query("#input")).getValue());
-						target.query("#result").appendChild(new Label(prop));
-					}
-		});
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Wire
+	Textbox input; // wired to a component input
+	
+	@Wire
+	Vlayout result; // wired to a component called result
+	
+	@Listen("onClick=#retrieve")
+	public void submit(Event event) throws Exception {
+		String key = input.getValue();
+		String prop = System.getProperty(key);
+		result.appendChild(new Label(key + " = " + prop));
 	}
+	
 
 }

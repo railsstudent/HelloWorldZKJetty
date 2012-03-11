@@ -1,30 +1,32 @@
 <?page title="My First ZK Application" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="My First ZK Application" border="normal">
+<window title="My First ZK Application" border="normal" apply="foo.PropertyRetriever">
 Hello World! Run In Jetty Container!
 <separator />
 <button label="Say Hello"  onClick='alert("Hello World!")' />
+
 <separator />
 Enter a property name: <textbox id="input" />
-<button label="Retrieve" apply="foo.PropertyRetriever" />
+<button label="Retrieve" id="retrieve"  />
 <vlayout id="result" />
 
 <separator/>
 
 <?variable-resolver class="foo.UserResolver"?>
-<grid>
+<grid apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('vm') @init('foo.UserViewModel')" model="@bind(vm.allUsers)">
 	<columns>
 		<column label="Name" sort="auto" />
 		<column label="Title" sort="auto" />
 		<column label="Age" sort="auto" />
 	</columns>
-	<rows>
-		<row forEach="${users}">
-			<label value="${each.name}" />
-			<label value="${each.title}" />
-			<label value="${each.age}" />
+	<template name="model" var="user">
+		<row>
+			<textbox value="@bind(user.name)" />
+			<textbox value="@bind(user.title)" />
+			<intbox value="@bind(user.age)" />
 		</row>
-	</rows>
+	</template>
 </grid>
 
 </window>

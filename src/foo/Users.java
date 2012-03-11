@@ -3,7 +3,7 @@ package foo;
 
 public class Users {
 
-	public static class User {
+	public static class User implements Comparable<User> {
 		
 		private String name;
 		private String title;
@@ -26,6 +26,25 @@ public class Users {
 		}
 		public void setAge(int age) {
 			this.age = age;
+		}
+
+		public int compareTo(User other) {
+
+		    //this optimization is usually worthwhile, and can
+		    //always be added
+		    if ( this == other ) return 0;
+
+		    if (this.name.compareTo(other.name) < 0) return -1;
+		    if (this.name.compareTo(other.name) > 0) return 1;
+
+		    if (this.title.compareTo(other.title) < 0) return -1;
+		    if (this.title.compareTo(other.title) > 0) return 1;
+
+		    if (this.age < other.age) return -1;
+		    if (this.age > other.age) return -1;
+
+		    assert this.equals(other) : "compareTo inconsistent with equals.";
+			return 0;
 		}
 	}
 	
